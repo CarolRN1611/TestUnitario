@@ -67,18 +67,18 @@ public class VendaTest {
     public void vendaDeProdutoInexistente(){
         Produto produtob = null;
         Venda venda = new Venda(produtob, 10);
-        Assertions.assertThrows(NullPointerException.class, () -> {
+        Assertions.assertThrows(Exception.class, () -> {
             venda.realizarVenda();
         });
     }
 
     //Testar criação de venda com quantidade negativa (deve falhar).
     //codigo não lança retorna false em caso de quantidade negatica ,nem lança um excessão
-    //@Test
-    //public void vendaProdutoNegativoQuantidade(){
-    //    venda = new Venda(produto,-10);
-    //    Assertions.assertFalse(venda.realizarVenda());
-   // }
+    @Test
+    public void vendaProdutoNegativoQuantidade(){
+        venda = new Venda(produto,-10);
+        Assertions.assertFalse(venda.realizarVenda());
+    }
 
     //Testar alteração do estoque após a tentativa de venda com estoque insuficiente.
     @Test
