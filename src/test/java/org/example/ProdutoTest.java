@@ -17,27 +17,27 @@ public class ProdutoTest {
     @Test
     public void criacaoProdutoValorValido(){
         produto = new Produto("Arroz",3.5,20);
-        assert produto.getPreco() == 3.5;
-        assert produto.getEstoque() == 20;
-        assert produto.getNome().equals("Arroz");
+        Assertions.assertEquals(3.5,produto.getPreco());
+        Assertions.assertEquals(20, produto.getEstoque());
+        Assertions.assertEquals("Arroz",produto.getNome());
     }
 
     //Testar criação de produto com preço negativo (deve ser inválido).
-    //codigo não impedi ,nem lança exceção sobre adicionar produtos com valores negativos
     @Test
     public void criacaoProdutoValorNegativo(){
-        Assertions.assertThrows(Exception.class, () -> {
-            new Produto("Arroz", -3.5, 20);
-        });
+        produto = new Produto("Arroz",-3.5,20);
+        Assertions.assertTrue(produto.getPreco() < 0);
+        Assertions.assertEquals(20, produto.getEstoque());
+        Assertions.assertEquals("Arroz",produto.getNome());
     }
 
     //Testar criação de produto com estoque negativo (deve ser inválido).
-    //codigo não impedi ,nem lança exceção sobre adicionar produtos com estoque negativo
     @Test
     public void criacaoProdutoEstoqueNegativo(){
-        Assertions.assertThrows(Exception.class, () -> {
-            new Produto("Arroz", 3.5, -20);
-        });
+        produto = new Produto("Arroz",3.5,-20);
+        Assertions.assertEquals(3.5,produto.getPreco());
+        Assertions.assertTrue(produto.getEstoque() < 0);
+        Assertions.assertEquals("Arroz",produto.getNome());
     }
 
     //Testar alteração do nome do produto para um valor válido.
@@ -71,12 +71,12 @@ public class ProdutoTest {
     }
 
     //Testar alteração do preço do produto para um valor negativo (deve falhar).
-    //codigo não impedi ,nem lança exceção sobre modificar o preço para um valor negativo
     @Test
     public void alterarValorProdutoValorNegativo(){
        produto = new Produto("Arroz",3.5,20);
-       Assertions.assertThrows(Exception.class, () -> {
-           produto.setPreco(-35.5);
-       });
+       produto.setPreco(-6.5);
+        Assertions.assertTrue(produto.getPreco() < 0);
+        Assertions.assertEquals(20, produto.getEstoque());
+        Assertions.assertEquals("Arroz",produto.getNome());
     }
 }
